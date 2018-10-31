@@ -1,10 +1,15 @@
 class PortfoliosController < ApplicationController
+  before_action :set_portfolio_item, only: %i[edit update]
+
   def index
     @portfolio_items = Portfolio.all
   end
 
   def new
     @portfolio_item = Portfolio.new
+  end
+
+  def edit
   end
 
   def create
@@ -17,7 +22,19 @@ class PortfoliosController < ApplicationController
     end
   end
 
+  def update
+    if @portfolio_item.update(portfolio_params)
+      redirect_to @portfolio_item, notice: 'Portfolio item was updated.'
+    else
+      render :edit
+    end
+  end
+
   private
+
+  def set_portfolio_item
+    @portfolio_item = Portfolio.find(params[:id])
+  end
 
   def portfolio_params
     params.require(:portfolio).permit(:title, :subtitle, :body)
