@@ -1,9 +1,9 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[show edit update destroy]
+  before_action :set_article, only: %i[show edit update destroy toggle_status]
 
   # GET /articles
   def index
-    @articles = Article.all
+    @articles = Article.order(created_at: :desc)
   end
 
   # GET /articles/1
@@ -43,6 +43,11 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     redirect_to articles_url, notice: 'Article was successfully destroyed.'
+  end
+
+  def toggle_status
+    @article.published? ? @article.draft! : @article.published!
+    redirect_to articles_url, notice: 'Article status was updated.'
   end
 
   private

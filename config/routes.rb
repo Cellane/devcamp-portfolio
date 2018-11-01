@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :articles
+  resources :articles do
+    member do
+      post :toggle_status
+    end
+  end
   resources :portfolios, except: [:show]
 
   root to: 'pages#home'
