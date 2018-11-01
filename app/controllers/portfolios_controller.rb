@@ -27,7 +27,7 @@ class PortfoliosController < ApplicationController
 
   def update
     if @portfolio_item.update(portfolio_params)
-      redirect_to @portfolio_item, notice: 'Portfolio item was updated.'
+      redirect_to portfolio_show_url(@portfolio_item), notice: 'Portfolio item was updated.'
     else
       render :edit
     end
