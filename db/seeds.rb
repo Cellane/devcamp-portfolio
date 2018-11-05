@@ -45,3 +45,9 @@ Portfolio.create!(
   thumb_image: 'https://placem.at/people?w=350&h=200'
 )
 
+3.times do |i|
+  Portfolio.last.technologies.create!(
+    name: "Technology #{i}"
+  )
+end
+
