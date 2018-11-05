@@ -19,7 +19,7 @@ class PortfoliosController < ApplicationController
     @portfolio_item = Portfolio.new(portfolio_params)
 
     if @portfolio_item.save
-      redirect_to @portfolio_item, notice: 'Your portfolio item is now live.'
+      redirect_to portfolio_show_path(@portfolio_item), notice: 'Your portfolio item is now live.'
     else
       render :new
     end
@@ -27,7 +27,7 @@ class PortfoliosController < ApplicationController
 
   def update
     if @portfolio_item.update(portfolio_params)
-      redirect_to portfolio_show_url(@portfolio_item), notice: 'Portfolio item was updated.'
+      redirect_to portfolio_show_path(@portfolio_item), notice: 'Portfolio item was updated.'
     else
       render :edit
     end
